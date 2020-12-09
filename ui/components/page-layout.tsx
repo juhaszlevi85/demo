@@ -49,8 +49,8 @@ const PageLayout = (props: PageLayoutProps) => {
               </Link>
             </MenuItem>
             <MenuItem>
-              <Link href="/locations">
-                <a>Locations</a>
+              <Link href="/ssg-csr">
+                <a>SSG + CSR</a>
               </Link>
             </MenuItem>
             <MenuItem>
@@ -66,6 +66,11 @@ const PageLayout = (props: PageLayoutProps) => {
             <MenuItem>
               <Link href="/quotes">
                 <a>Quotes</a>
+              </Link>
+            </MenuItem>
+            <MenuItem>
+              <Link href="/locations">
+                <a>Locations</a>
               </Link>
             </MenuItem>
           </MenuList>
