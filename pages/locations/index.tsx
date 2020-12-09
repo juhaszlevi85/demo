@@ -1,21 +1,22 @@
+import { Card, CardContent, Typography } from "@material-ui/core";
+import Grid from "@material-ui/core/Grid";
 import React from "react";
 import { useQuery } from "react-query";
 import PageLayout from "../../components/page-layout";
-import axios from "axios";
-import Grid from "@material-ui/core/Grid";
-import { Card, CardContent, Typography } from "@material-ui/core";
 
+// Approach 1: Static generation + CSR
 const LocationPage: React.FunctionComponent<{}> = () => {
   const { isLoading, error, data } = useQuery("locations", async () => {
-    const { data } = await axios.get(
-      "https://jsonplaceholder.typicode.com/users"
+    const response = await fetch("http://localhost:3001/users").then((res) =>
+      res.json()
     );
-    return data;
+    return response.users;
   });
 
   return (
     <PageLayout>
       <h1>Location Page</h1>
+      <h3>Static generation + CSR to fetch data</h3>
       <Grid container>
         {isLoading && <Grid item>Loading...</Grid>}
         {data &&

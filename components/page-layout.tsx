@@ -1,8 +1,8 @@
-import { Grid, MenuItem, MenuList, Paper } from "@material-ui/core";
+import { Grid, MenuItem, MenuList } from "@material-ui/core";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import Head from "next/head";
 import Link from "next/link";
-import React, { ReactNode, useState } from "react";
+import React, { ReactNode } from "react";
 
 const useStyles = makeStyles({
   root: {
@@ -13,6 +13,9 @@ const useStyles = makeStyles({
     color: "white",
     height: "100%",
     padding: "0 30px",
+    "& a": {
+      width: "100%",
+    },
   },
 });
 
@@ -26,14 +29,7 @@ interface PageLayoutProps {
 }
 
 const PageLayout = (props: PageLayoutProps) => {
-  const {
-    children,
-    title,
-    headerTitle,
-    selectedKey,
-    hasBackButton,
-    headerButtons,
-  } = props;
+  const { children } = props;
 
   const classes = useStyles();
 
@@ -60,6 +56,16 @@ const PageLayout = (props: PageLayoutProps) => {
             <MenuItem>
               <Link href="/inventories">
                 <a>Inventories</a>
+              </Link>
+            </MenuItem>
+            <MenuItem>
+              <Link href="/shipments">
+                <a>Shipments</a>
+              </Link>
+            </MenuItem>
+            <MenuItem>
+              <Link href="/quotes">
+                <a>Quotes</a>
               </Link>
             </MenuItem>
           </MenuList>
