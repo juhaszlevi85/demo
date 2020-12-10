@@ -1,4 +1,4 @@
-import { Grid, MenuItem, MenuList } from "@material-ui/core";
+import { Divider, Grid, MenuItem, MenuList } from "@material-ui/core";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import Head from "next/head";
 import Link from "next/link";
@@ -16,6 +16,10 @@ const useStyles = makeStyles({
     "& a": {
       width: "100%",
     },
+  },
+  divider: {
+    height: 2,
+    margin: "5px 0px",
   },
 });
 
@@ -43,6 +47,8 @@ const PageLayout = (props: PageLayoutProps) => {
       <Grid container style={{ height: "100vh" }}>
         <Grid item xs={3} className={classes.root}>
           <MenuList>
+            <h3> Demonstrate the different rendering strategies of Next.js </h3>
+            <Divider className={classes.divider}></Divider>
             <MenuItem>
               <Link href="/profile">
                 <a>Profile</a>
@@ -54,23 +60,29 @@ const PageLayout = (props: PageLayoutProps) => {
               </Link>
             </MenuItem>
             <MenuItem>
-              <Link href="/inventories">
-                <a>Inventories</a>
+              <Link href="/ssg">
+                <a>SSG</a>
               </Link>
             </MenuItem>
             <MenuItem>
-              <Link href="/shipments">
-                <a>Shipments</a>
+              <Link href="/ssr">
+                <a>SSR</a>
               </Link>
             </MenuItem>
             <MenuItem>
-              <Link href="/quotes">
-                <a>Quotes</a>
+              <Link href="/issg">
+                <a>Incremental SSG</a>
               </Link>
             </MenuItem>
+            <Divider className={classes.divider} />
             <MenuItem>
               <Link href="/locations">
                 <a>Locations</a>
+              </Link>
+            </MenuItem>
+            <MenuItem>
+              <Link href="/locations/create">
+                <a>Create location</a>
               </Link>
             </MenuItem>
           </MenuList>

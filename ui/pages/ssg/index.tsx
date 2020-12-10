@@ -5,19 +5,14 @@ import Typography from "@material-ui/core/Typography";
 import React from "react";
 import PageLayout from "../../components/page-layout";
 
-// Approach 4: Incremental static generation (update existing pages by re-rendering them in the background as traffic comes in)
-function QuotesPage(props: any) {
+// Approach 2: Static generation (with data -> fetches data on pre-render)
+function InventoriesPage(props: any) {
   const data = props.users;
 
   return (
     <PageLayout>
-      <h1>Quotes Page</h1>
-      <h3>
-        Incremental Static generation (update existing pages by re-rendering
-        them in the background as traffic comes in, background regeneration
-        ensures traffic is served uninterruptedly, always from static storage,
-        and the newly built page is pushed only after it's done generating.)
-      </h3>
+      <h1>Static generation example</h1>
+      <h3>Static generation (with data, fetches data on pre-render)</h3>
       <Grid container>
         {/* {isLoading && <Grid item>Loading...</Grid>} */}
         {data &&
@@ -41,9 +36,7 @@ function QuotesPage(props: any) {
   );
 }
 
-// This function gets called at build time on server-side.
-// It may be called again, on a serverless function, if
-// revalidation is enabled and a new request comes in
+// This function gets called at build time
 export async function getStaticProps() {
   // Call an external API endpoint to get users
   const data = await fetch("http://localhost:3001/users").then((res) =>
@@ -56,11 +49,7 @@ export async function getStaticProps() {
     props: {
       users: data.users,
     },
-    // Next.js will attempt to re-generate the page:
-    // - When a request comes in
-    // - At most once every second
-    revalidate: 1, // In seconds
   };
 }
 
-export default QuotesPage;
+export default InventoriesPage;

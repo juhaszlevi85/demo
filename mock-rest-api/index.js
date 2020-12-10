@@ -7,6 +7,7 @@ const port = 3001;
 
 const users = [];
 const locations = [];
+let locationInd = 50;
 
 app.use(cors());
 
@@ -34,6 +35,15 @@ app.get("/locations", (request, response) => {
   }
 });
 
+app.post("/locations", (request, response) => {
+  if (request.method === "POST") {
+    const location = { id: locationInd, ...request.body };
+    locations.push(location);
+    locationInd++;
+    response.status(200).jsonp(location);
+  }
+});
+
 app.listen(port, () => {
   // Create 10 users
   for (let i = 0; i < 10; i++) {
@@ -47,11 +57,17 @@ app.listen(port, () => {
       occupied = 0;
     }
 
-    if ( i % 10 === 0) {
-            occupied = localCapacity;
+    if (i % 10 === 0) {
+      occupied = localCapacity;
     }
 
-    locations.push({ id: `${i}`, name: `Location - ${i}`, address: `Address - ${i}`, capacity: localCapacity, occupied: occupied });
+    locations.push({
+      id: `${i}`,
+      name: `Location - ${i}`,
+      address: `Address - ${i}`,
+      capacity: localCapacity,
+      occupied: occupied,
+    });
   }
   console.log("JSON Server is running");
 });

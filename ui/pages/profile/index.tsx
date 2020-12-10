@@ -8,6 +8,10 @@ const ProfilePage: React.FunctionComponent<{}> = () => {
   const [mutatePostUsers] = useMutation((name: string) =>
     fetch("http://localhost:3001/users", {
       method: "post",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify({ name }),
     })
   );

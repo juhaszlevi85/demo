@@ -5,14 +5,16 @@ import Typography from "@material-ui/core/Typography";
 import React from "react";
 import PageLayout from "../../components/page-layout";
 
-// Approach 2: Static generation (with data -> fetches data on pre-render)
-function InventoriesPage(props: any) {
+// Approach 3: SSR  (the page HTML is generated on each request,
+// it will be slower because the page cannot be cached by a CDN,
+// but the pre - rendered page will always be up - to - date.)
+function ShipmentsPage(props: any) {
   const data = props.users;
 
   return (
     <PageLayout>
-      <h1>Inventories Page</h1>
-      <h3>Static generation (with data, fetches data on pre-render)</h3>
+      <h1>Server side rendering example</h1>
+      <h3> SSR (the page HTML is generated on each request)</h3>
       <Grid container>
         {/* {isLoading && <Grid item>Loading...</Grid>} */}
         {data &&
@@ -36,20 +38,15 @@ function InventoriesPage(props: any) {
   );
 }
 
-// This function gets called at build time
-export async function getStaticProps() {
-  // Call an external API endpoint to get users
+// This gets called on every request
+export async function getServerSideProps() {
+  // Fetch data from external API
   const data = await fetch("http://localhost:3001/users").then((res) =>
     res.json()
   );
 
-  // By returning { props: { users } }, the component
-  // will receive `users` as a prop at build time
-  return {
-    props: {
-      users: data.users,
-    },
-  };
+  // Pass data to the page via props
+  return { props: { users: data.users } };
 }
 
-export default InventoriesPage;
+export default ShipmentsPage;
