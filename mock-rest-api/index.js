@@ -38,7 +38,7 @@ app.listen(port, () => {
   // Create 10 users
   for (let i = 0; i < 10; i++) {
     users.push({ name: `Name${i}` });
-  }
+  } 
 
   for (let i = 0; i < 50; i++) {
     const localCapacity = Math.round(Math.random() * 1000);
@@ -48,7 +48,7 @@ app.listen(port, () => {
     }
 
     if ( i % 10 === 0) {
-            occupied = localCapacity;
+      occupied = localCapacity;
     }
 
     locations.push({ id: `${i}`, name: `Location - ${i}`, address: `Address - ${i}`, capacity: localCapacity, occupied: occupied });
